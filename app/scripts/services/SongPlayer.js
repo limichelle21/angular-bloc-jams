@@ -13,7 +13,7 @@
         
         var currentBuzzObject = null;
 /** 
-* @function setSong - private function
+* @private function setSong
 * @desc Stops currently playing song and loads new audio file as currentBuzzObject
 * @param {object} song
 */
@@ -31,7 +31,16 @@
 
                 currentSong = song;
         };
-
+/**
+@private function playSong
+@desc Plays the currentBuzzObject and sets song.playing boolean to true
+@param {object} song
+*/
+        
+        var playSong = function(song) {
+            currentBuzzObject.play();
+            song.playing = true;
+        }
 /**
 @public method .play()
 @desc If currentSong is not the clicked song, set current song variables to clicked song and play new song; otherwise if currentSong IS clicked song, pause the song. Set boolean of song.playing to true
@@ -41,12 +50,10 @@
             
             if (currentSong != song) {
                 setSong(song);
-                currentBuzzObject.play();
-                song.playing = true;
-                
+                playSong(song);
             } else if (currentSong === song){
                 if (currentBuzzObject.isPaused()) {
-                    currentBuzzObject.play();
+                    playSong(song)
                 }
             }
         };
