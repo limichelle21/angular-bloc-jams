@@ -66,7 +66,7 @@
                 
  /**
  @public function
- @desc constantly apply the change in value of scope.value as the thumb is dragged
+ @desc constantly apply the change in value of scope.value as the thumb is draggedtrac
  */
                 scope.trackThumb = function() {
                     $document.bind('mousemove.thumb', function(event) {
