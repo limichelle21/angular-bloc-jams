@@ -81,6 +81,13 @@
                         $document.unbind('mouseup.thumb');
                     });
                 };
+                
+                
+                
+                scope.thumbStyle = function() {
+                    // update position of seek bar thumb
+                    return {left: percentString()};
+                };
             }
         };
     }
