@@ -19,14 +19,15 @@
             templateUrl: '/templates/directives/seek_bar.html',
             replace: true,
             restrict: 'E',
-            scope: { },
+            scope: {
+                onChange: '&'
+            },
 
 /**
 @desc link function sets up seek bars
 */
             
             link: function(scope, element, attributes) {
-                // directive logic to return
                 scope.value = 0;
                 scope.max = 100;
 
@@ -35,6 +36,16 @@
 @type {object}
 */
                 var seekBar = $(element);
+                
+                attributes.$observe('value', function(newValue) {
+                    scope.value = newValue;
+                });
+                
+                attributes.$observe('max', function(newValue) {
+                    scope.max = newValue;
+                });
+                
+                
                 
 /**
 @private function
@@ -62,17 +73,19 @@
                 scope.onClickSeekBar = function(event) {
                     var percent = calculatePercent(seekBar, event);
                     scope.value = percent * scope.max;
+                    notifyOnChange(scope.value);
                 };
                 
  /**
  @public function
- @desc constantly apply the change in value of scope.value as the thumb is draggedtrac
+ @desc constantly apply the change in value of scope.value as the thumb is dragged
  */
                 scope.trackThumb = function() {
                     $document.bind('mousemove.thumb', function(event) {
                         var percent = calculatePercent(seekBar, event);
                         scope.$apply(function() {
                             scope.value = percent * scope.max;
+                            notifyOnChange(scope.value);
                         });
                     });
                     
@@ -82,7 +95,15 @@
                     });
                 };
                 
-                
+/**
+@private function
+@desc to notify onChange expression that the value has changed
+*/
+                var notifyOnChange = function(newValue) {
+                    if (typeof scope.onChange === 'function') {
+                        scope.onChange({value: newValue});
+                    }
+                };
                 
                 scope.thumbStyle = function() {
                     // update position of seek bar thumb
