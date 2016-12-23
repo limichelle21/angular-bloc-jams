@@ -82,6 +82,14 @@
 
         SongPlayer.currentTime = null;
     
+                
+/**
+@desc public variable holds value of the volume
+@type {number}
+*/      
+        SongPlayer.volume = 70;
+
+        
 /**
 @public method .play()
 @desc If currentSong is not the clicked song, set current song variables to clicked song and play new song; otherwise if currentSong IS clicked song, pause the song. Set boolean of song.playing to true
@@ -160,6 +168,20 @@
                 currentBuzzObject.setTime(time);
             }
         };
+        
+
+/**
+@public method .setVolume()
+@desc update the volume on change
+@param {number} volume
+*/
+        SongPlayer.setVolume = function(volume) {
+              if (currentBuzzObject) {
+                  currentBuzzObject.setVolume(volume);
+              }
+            SongPlayer.volume = volume;
+        };
+        
         
         
         return SongPlayer;
