@@ -57,7 +57,8 @@
             currentBuzzObject.stop();
             song.playing = null;
         };
-
+        
+        
 /**
 @private function getSongIndex
 @desc returns index of a song from song array of currentAlbum
@@ -105,6 +106,10 @@
                     playSong(song)
                 }
             }
+            
+            if (song.currentTime >= song.duration) {
+                next(song);
+            };
         };
 
 /**
@@ -181,6 +186,8 @@
               }
             SongPlayer.volume = volume;
         };
+        
+        
         
         
         
