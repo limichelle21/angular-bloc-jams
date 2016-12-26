@@ -183,9 +183,17 @@
             SongPlayer.volume = volume;
         };
         
+/**        
+@public method .mute()
+@desc mute or unmute volume on click
+@param {number} volume
+*/
         
-        
-        
+        SongPlayer.mute = function() {
+            if (currentBuzzObject) {
+                currentBuzzObject.toggleMute();
+            }
+        };
         
         return SongPlayer;
     }
