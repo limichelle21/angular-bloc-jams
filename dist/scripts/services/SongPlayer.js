@@ -31,14 +31,14 @@
                 currentBuzzObject.bind('timeupdate', function() {
                     $rootScope.$apply(function() {
                         SongPlayer.currentTime = currentBuzzObject.getTime();
+                        
+                        if (SongPlayer.currentTime >= SongPlayer.currentSong.duration) {
+                            SongPlayer.next();
+                        }
                     });
                 });
             
-                currentBuzzObject.bind('timeupdate', function() {
-                    if (SongPlayer.currentTime >= currentBuzzObject.duration) {
-                        SongPlayer.next();
-                    }
-                });
+              
 
                 SongPlayer.currentSong = song;
         };
