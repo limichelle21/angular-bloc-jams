@@ -33,6 +33,12 @@
                         SongPlayer.currentTime = currentBuzzObject.getTime();
                     });
                 });
+            
+                currentBuzzObject.bind('timeupdate', function() {
+                    if (SongPlayer.currentTime >= currentBuzzObject.duration) {
+                        SongPlayer.next();
+                    }
+                });
 
                 SongPlayer.currentSong = song;
         };
@@ -167,7 +173,7 @@
         SongPlayer.setCurrentTime = function(time) {
             if (currentBuzzObject) {
                 currentBuzzObject.setTime(time);
-            }
+            }   
         };
         
 
