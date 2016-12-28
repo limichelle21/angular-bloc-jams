@@ -1,5 +1,5 @@
 (function() {
-    function SongPlayer($rootScope, Fixtures) {
+    function SongPlayer(Fixtures) {
         var SongPlayer = {};     
 
 /**
@@ -29,7 +29,7 @@
                 });
             
                 currentBuzzObject.bind('timeupdate', function() {
-                    $rootScope.$apply(function() {
+                    newScope.$apply(function() {
                         SongPlayer.currentTime = currentBuzzObject.getTime();
                     });
                 });
@@ -183,11 +183,22 @@
         };
         
         
+/**
+@public method .registerScope()
+@desc register a controller's scope
+@param {object} scope
+*/
+        var newScope = null;
+        
+        SongPlayer.registerScope = function(scope) {
+            newScope = scope;
+        };
+        
         
         return SongPlayer;
     }
     
     angular
         .module('blocJams')
-        .factory('SongPlayer', ['$rootScope', 'Fixtures', SongPlayer]);
+        .factory('SongPlayer', ['Fixtures', SongPlayer]);
 })();
